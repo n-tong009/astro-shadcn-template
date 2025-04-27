@@ -6,14 +6,12 @@ import { Button } from "@/components/ui/button";
 import type { PageMeta, getCurrentAssetsUrl } from '@/lib/constants';
 
 const meta: PageMeta = {
-  // title, descriptionを指定しない場合はデフォルト値が使用される
+  title: 'Astro + TailwindCSS + shadcn/ui テンプレート',
+  description: 'モダンなWeb開発に必要な機能を備えた包括的なテンプレート',
   ogType: 'website',
 };
 ---
 
 <Layout {...meta}>
-  <main class="grid place-items-center h-screen content-center">
-    <Button>Button</Button>
-  </main>
   <Welcome />
 </Layout>

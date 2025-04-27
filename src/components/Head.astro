@@ -22,7 +22,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5">
 	<title>{title} | {SITE_CONFIG.name}</title>
 
 	<!-- SEO関連 -->
@@ -61,4 +61,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 	
 	<!-- スロット: 追加のhead要素をここに挿入可能 -->
 	<slot />
+
+	<!-- ダークモード検知スクリプト -->
+	<script is:inline>
+		// システムのダークモード設定を検知
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.classList.add('dark');
+		}
+		
+		// ダークモード設定の変更を監視
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+			if (e.matches) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		});
+	</script>
 </head>

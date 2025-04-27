@@ -75,6 +75,9 @@
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
+  --astro-gradient1-stop1: #000014;
+  --astro-gradient1-stop2: #150426;
+  --astro-accent-color: #ff5d01;
 }
 
 .dark {
@@ -109,6 +112,9 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --astro-gradient1-stop1: #ffffff;
+  --astro-gradient1-stop2: #e0e0e0;
+  --astro-accent-color: #ff8c42;
 }
 
 @layer base {
