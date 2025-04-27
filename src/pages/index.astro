@@ -1,0 +1,19 @@
+---
+// src/pages/index.astro
+import Welcome from '@/components/Welcome.astro';
+import Layout from '@/layouts/Layout.astro';
+import { Button } from "@/components/ui/button";
+import type { PageMeta, getCurrentAssetsUrl } from '@/lib/constants';
+
+const meta: PageMeta = {
+  // title, descriptionを指定しない場合はデフォルト値が使用される
+  ogType: 'website',
+};
+---
+
+<Layout {...meta}>
+  <main class="grid place-items-center h-screen content-center">
+    <Button>Button</Button>
+  </main>
+  <Welcome />
+</Layout>

@@ -1,0 +1,18 @@
+---
+// src/pages/hoge/index.astro
+import Layout from '@/layouts/Layout.astro';
+import type { PageMeta, getCurrentAssetsUrl } from '@/lib/constants';
+
+const meta: PageMeta = {
+  title: 'hoge',
+  description: 'サイトのhogeページです',
+  ogType: 'article',
+};
+---
+
+<Layout {...meta}>
+  <main class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4">hoge</h1>
+    <!-- コンテンツ -->
+  </main>
+</Layout>
