@@ -81,6 +81,7 @@
 > │   │   └── Layout.astro       # メインレイアウト
 > │   ├── lib/                   # ユーティリティと設定
 > │   │   ├── constants.ts       # 環境設定と定数
+> │   │   ├── htmlFormatter.ts   # htmlフォーマッター
 > │   │   ├── sentry.ts          # エラートラッキング
 > │   │   └── utils.ts           # ユーティリティ関数
 > │   ├── pages/                 # ページコンポーネント
