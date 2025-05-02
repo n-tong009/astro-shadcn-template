@@ -53,35 +53,52 @@ export default defineConfig({
       htmlWhitespaceSensitivity: "css"
     }),
     {
+      // ビルド後のフォルダをクリーンアップするプラグイン名
       name: 'clean-dist-folder',
       hooks: {
+        // Astroビルドプロセス完了後に実行されるフック
         'astro:build:done': async ({ dir }) => {
           try {
+            // 不要なシステムファイルをglobパターンで検索
+            // .DS_Store: macOSのフォルダメタデータファイル
+            // Thumbs.db: Windowsのサムネイルキャッシュ
+            // Desktop.ini: Windowsフォルダの表示設定ファイル
             const junkFiles = await glob(`${dir.pathname}/**/{.DS_Store,Thumbs.db,Desktop.ini}`);
             console.log(`Found ${junkFiles.length} junk files to delete`);
 
+            // 検出した不要ファイルを一つずつ削除
             for (const file of junkFiles) {
-              await fs.unlink(file);
+              await fs.unlink(file); // fsモジュールのunlinkメソッドでファイル削除
             }
 
+            // macOS特有の隠しディレクトリを検索
+            // __MAXCOSXディレクトリはzipファイル解凍時などに生成される不要ディレクトリ
             const macosxDirs = await glob(`${dir.pathname}/**/__MACOSX`);
             console.log(`Found ${macosxDirs.length} __MACOSX directories to delete`);
 
+            // 検出した__MAXCOSXディレクトリを一つずつ削除
             for (const dirPath of macosxDirs) {
+              // ディレクトリであることを確認してから削除処理
               const stats = await fs.stat(dirPath);
               if (stats.isDirectory()) {
+                // recursive: true - ディレクトリ内のすべてのファイル・ディレクトリを再帰的に削除
+                // force: true - 読み取り専用ファイルなども強制的に削除
                 await fs.rm(dirPath, { recursive: true, force: true });
               }
             }
 
+            // クリーンアップ成功メッセージを出力
             console.log('Clean-up completed successfully');
           } catch (error) {
+            // エラー発生時のハンドリング
+            // コンソールに詳細なエラー情報を出力
             console.error('--- Clean-up Dist Folder Error ---');
-            console.error(`Error Message: ${error.message}`);
-            console.error(`Stack Trace: ${error.stack}`);
+            console.error(`Error Message: ${error.message}`); // エラーメッセージ
+            console.error(`Stack Trace: ${error.stack}`);     // スタックトレース情報
             console.error('-----------------------------------');
 
-            // 例外としてレポート
+            // Sentryにエラーを送信（本番環境で詳細なエラー追跡ができるよう）
+            // src/lib/sentry.tsで定義されたcaptureExceptionメソッドを使用
             captureException(error);
           }
           
