@@ -633,6 +633,7 @@ The following features are configured in `astro.config.mjs`:
 1. **Cleanup processing**: Automatically deletes unnecessary files after build completion
 2. **Asset optimization**: Controls inlining and customizes asset paths
 3. **Environment-specific settings**: Applies different settings for development, staging, and production
+4. **HTML Auto-formatting**: Automatically formats HTML as part of the build process
 
 ```javascript
 export default defineConfig({
@@ -644,6 +645,14 @@ export default defineConfig({
   },
   integrations: [
     react(),
+    // HTML formatting plugin (integrated into the build process)
+    htmlBeautifier({
+      parser: "html",
+      tabWidth: 2,
+      useTabs: true,
+      printWidth: 120,
+      htmlWhitespaceSensitivity: "css"
+    }),
     {
       name: 'clean-dist-folder',
       hooks: {
@@ -656,6 +665,8 @@ export default defineConfig({
   // ...
 });
 ```
+
+> **Note**: HTML formatting is automatically integrated into the Astro build process, and no additional commands need to be executed. Simply running `npm run build` will generate formatted HTML files in the build output.
 
 ### Vite Configuration Details
 

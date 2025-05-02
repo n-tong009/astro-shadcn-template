@@ -628,11 +628,12 @@ TailwindCSS v4では、より柔軟なカスタマイズと新しい構文が導
 
 ### ビルドプロセスのカスタマイズ
 
-`astro.config.mjs`では、以下の機能が設定されています：
+`astro.config.mjs`では、以下の機能が設定されています。
 
 1. **クリーンアップ処理**: ビルド完了時に不要ファイルを自動削除
 2. **アセット最適化**: インライン化の制御とアセットパスのカスタマイズ
 3. **環境別設定**: 開発、ステージング、本番で異なる設定を適用
+4. **HTML自動整形**: ビルドプロセスの一部としてHTMLの整形を自動実行
 
 > ```javascript
 > export default defineConfig({
@@ -644,6 +645,14 @@ TailwindCSS v4では、より柔軟なカスタマイズと新しい構文が導
 >   },
 >   integrations: [
 >     react(),
+>     // HTML整形プラグインを追加（ビルドプロセスに統合済み）
+>     htmlBeautifier({
+>       parser: "html",
+>       tabWidth: 2,
+>       useTabs: true,
+>       printWidth: 120,
+>       htmlWhitespaceSensitivity: "css"
+>     }),
 >     {
 >       name: 'clean-dist-folder',
 >       hooks: {
@@ -656,6 +665,8 @@ TailwindCSS v4では、より柔軟なカスタマイズと新しい構文が導
 >   // ...
 > });
 > ```
+
+**注意**: HTMLの整形は自動的にAstroのビルドプロセスに統合されており、追加のコマンドを実行する必要はありません。`npm run build`を実行するだけで、生成されたHTMLファイルは整形済みの状態でビルド出力されます。
 
 ### Vite設定の詳細
 

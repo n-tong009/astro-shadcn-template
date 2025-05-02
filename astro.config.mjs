@@ -1,13 +1,20 @@
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
-import { getCurrentSiteUrl, getCurrentBaseUrl, getCurrentAssetsUrl, ASSETS_URL } from './src/lib/constants.ts';
+// 組み込みモジュール
 import { URL } from 'node:url';
-import { initSentry, captureException } from './src/lib/sentry';
-import glob from 'fast-glob';
 import { promises as fs } from 'fs';
 
-initSentry(); // SentryをAstro起動時に初期化
+// 外部ライブラリ/フレームワーク
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import glob from 'fast-glob';
+import tailwindcss from '@tailwindcss/vite';
+
+// プロジェクト内モジュール
+import { getCurrentSiteUrl, getCurrentBaseUrl, getCurrentAssetsUrl, ASSETS_URL } from './src/lib/constants.ts';
+import htmlBeautifier from './src/lib/htmlFormatter.js';
+import { initSentry, captureException } from './src/lib/sentry';
+
+// SentryをAstro起動時に初期化
+initSentry();
 
 // ビルド環境に合わせた内容を取得
 const siteUrl = getCurrentSiteUrl();
@@ -24,6 +31,7 @@ export default defineConfig({
   site: siteUrl,
   base: baseUrl,
   outDir: outDirUrl,
+  compressHTML: false, // htmlを圧縮するか否か デフォルトでは圧縮を解除しています。
   build: {
     // スタイルシートをインライン化するかどうか
     inlineStylesheets: 'never',
@@ -31,9 +39,19 @@ export default defineConfig({
     assets: assetsDir,
     // アセットのプレフィックスを指定
     assetsPrefix: ASSETS_URL.STATUS ? assetsUrl : undefined,
+    // HTMLの圧縮を無効化し、整形されたHTMLを出力
+    format: 'file',
   },
   integrations: [
     react(),
+    // HTML整形プラグインを追加
+    htmlBeautifier({
+      parser: "html",
+      tabWidth: 2,
+      useTabs: true,
+      printWidth: 120,
+      htmlWhitespaceSensitivity: "css"
+    }),
     {
       name: 'clean-dist-folder',
       hooks: {
@@ -86,6 +104,9 @@ export default defineConfig({
       assetsInlineLimit: 0, // 4KB以下の時に自動的にインラインで埋め込まれてしまうのを防ぐ
       rollupOptions: {
         output: {
+          entryFileNames: (entryInfo) => {
+            return `assets/js/[name].js`; // 必要に応じて.[hash]もつけれます。
+          },
           // アセットファイル名のカスタマイズ（必要に応じて）
           assetFileNames: (assetInfo) => {
             if (ASSETS_URL.STATUS) {
