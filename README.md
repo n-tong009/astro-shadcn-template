@@ -81,6 +81,7 @@ The project includes Volta configuration, pinned in package.json as follows:
 │   │   └── Layout.astro       # Main layout
 │   ├── lib/                   # Utilities and configurations
 │   │   ├── constants.ts       # Environment settings and constants
+│   │   ├── htmlFormatter.ts   # html formatter
 │   │   ├── sentry.ts          # Error tracking
 │   │   └── utils.ts           # Utility functions
 │   ├── pages/                 # Page components
