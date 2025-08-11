@@ -9,9 +9,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useState, useEffect } from 'react';
+import { Switch } from '@/components/ui/switch';
+import { useEffect, useState } from 'react';
 
 const SettingsDialog = () => {
   const [theme, setTheme] = useState('system');
