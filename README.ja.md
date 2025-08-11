@@ -16,13 +16,16 @@ v4、shadcn/ui、React、TypeScriptを統合し、環境別のビルド設定と
 
 - **Astro v5**: 高速でモダンな静的サイトジェネレーター
 - **TailwindCSS v4**: 最新のユーティリティファーストCSSフレームワーク
-- **shadcn/ui**: 再利用可能でカスタマイズ可能なUIコンポーネント
+- **[shadcn/ui](#-shadcnui-の使用)**: 再利用可能でカスタマイズ可能なUIコンポーネント
 - **React Integration**: Astro内でのReactコンポーネントの利用
 - **TypeScript**: 型安全な開発環境
 - **環境別設定**: 開発・ステージング・本番環境の自動切り替え
-- **Sentry**: エラートラッキングと監視
+- **[Sentry](#-エラートラッキング)**: エラートラッキングと監視
 - **カスタムパス設定**: ベースURL、アセットURLの柔軟な設定
 - **GitHub Pages**: CI/CDパイプラインによる自動デプロイ
+- **[ESLint + Prettier](#-コード品質管理)**: コード品質とフォーマット統一
+- **[Vitest](#-テスト環境)**: React Testing Library統合テスト環境
+- **[GitHub Actions](#-cicd-パイプライン)**: 自動CI/CD、セキュリティ監査、マルチ環境テスト
 
 ## 🌐 デモサイト
 
@@ -121,13 +124,22 @@ GitHub Pagesでホストされているデモサイトで、このテンプレ�
 
 ## 🔧 コマンド
 
-| コマンド          | 説明                                        |
-| :---------------- | :------------------------------------------ |
-| `npm run dev`     | 開発サーバーを起動（http://localhost:3000） |
-| `npm run build`   | 本番用にビルド                              |
-| `npm run stg`     | ステージング環境用にビルド                  |
-| `npm run prod`    | 本番環境用にビルド                          |
-| `npm run preview` | ビルド結果をプレビュー                      |
+| コマンド              | 説明                                        |
+| :-------------------- | :------------------------------------------ |
+| `npm run dev`         | 開発サーバーを起動（http://localhost:3000） |
+| `npm run build`       | 本番用にビルド                              |
+| `npm run stg`         | ステージング環境用にビルド                  |
+| `npm run prod`        | 本番環境用にビルド                          |
+| `npm run preview`     | ビルド結果をプレビュー                      |
+| `npm run lint`        | ESLintによるコード品質チェック              |
+| `npm run lint:fix`    | ESLintによる自動修正                        |
+| `npm run format`      | Prettierによるコードフォーマット            |
+| `npm run format:check` | フォーマット確認                           |
+| `npm run type-check`  | TypeScript型チェック                        |
+| `npm run test`        | Vitestテスト実行（ウォッチモード）           |
+| `npm run test:run`    | Vitestテスト実行（一回実行）                 |
+| `npm run test:ui`     | Vitestテストブラウザ実行                     |
+| `npm run test:coverage` | テストカバレッジ確認                       |
 
 ## ⚙️ 環境設定
 
@@ -571,6 +583,190 @@ Sentryの初期化設定をカスタマイズ可能
 - Sentryダッシュボードでリアルタイムのエラー追跡
 - エラーの発生頻度、影響を受けるユーザー数の可視化
 - スタックトレースと環境情報の自動収集
+
+## 🧹 コード品質管理
+
+このプロジェクトでは、ESLintとPrettierを統合したコード品質管理システムを提供しています。
+
+### ESLint の設定
+
+モダンなFlat Config形式を採用し、以下の機能を提供：
+
+- **TypeScript対応**: `@typescript-eslint`による型安全なコード解析
+- **React対応**: React Hooksやアクセシビリティルールを統合
+- **Astro対応**: `.astro`ファイルのリンティング
+- **カスタムルール**: プロジェクト固有のコード規約を適用
+
+### Prettier の設定
+
+コードフォーマットの自動統一機能：
+
+- **Astro Plugin**: `.astro`ファイルの適切なフォーマット
+- **保存時自動実行**: VSCodeでファイル保存時に自動フォーマット
+- **一括フォーマット**: プロジェクト全体のコード統一
+
+### 設定ファイル
+
+```javascript
+// eslint.config.js - Flat Config形式
+export default [
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      globals: { console: 'readonly', process: 'readonly' }
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+      'react': reactPlugin,
+      'jsx-a11y': jsxA11yPlugin
+    }
+  },
+  ...astroPlugin.configs['flat/recommended']
+];
+```
+
+### VSCode統合
+
+`.vscode/settings.json`で開発環境を最適化：
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.experimental.useFlatConfig": true
+}
+```
+
+### コード品質コマンド
+
+```bash
+# ESLintチェック
+npm run lint
+
+# 自動修正
+npm run lint:fix
+
+# Prettierフォーマット  
+npm run format
+
+# フォーマット確認
+npm run format:check
+
+# TypeScript型チェック
+npm run type-check
+```
+
+### 統合されたワークフロー
+
+1. **開発時**: ファイル保存で自動フォーマット
+2. **コミット前**: 手動でlint実行による品質確認
+3. **CI/CD**: GitHub Actionsで自動品質チェック
+4. **デプロイ前**: 型チェック含む包括的検証
+
+## 🧪 テスト環境
+
+このプロジェクトでは、モダンなテスト環境としてVitestとReact Testing Libraryを統合しています。
+
+### Vitest の特徴
+
+- **高速実行**: Viteベースの高速テストランナー
+- **ES Modules対応**: モダンなJavaScript環境をネイティブサポート
+- **ウォッチモード**: ファイル変更を監視して自動テスト実行
+- **カバレッジ**: ビルトインのコードカバレッジ機能
+- **UIモード**: ブラウザベースのテスト実行とデバッグ
+
+### テスト設定
+
+`vitest.config.ts`でAstroプロジェクトに最適化された設定を提供：
+
+```typescript
+export default defineConfig(
+  getViteConfig({
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts']
+    }
+  })
+);
+```
+
+### React Testing Library統合
+
+Reactコンポーネントのテストに特化したテスティングユーティリティ：
+
+```typescript
+// src/test/setup.ts
+import '@testing-library/jest-dom';
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+
+afterEach(() => {
+  cleanup();
+});
+```
+
+### テストコマンド
+
+```bash
+# ウォッチモードでテスト実行
+npm run test
+
+# 一回だけテスト実行
+npm run test:run
+
+# ブラウザUIでテスト実行
+npm run test:ui
+
+# カバレッジ付きでテスト実行
+npm run test:coverage
+```
+
+### テストファイルの配置
+
+```text
+src/
+├── components/
+│   ├── ui/
+│   │   ├── button.tsx
+│   │   └── button.test.tsx  # テストファイル
+│   └── Welcome.test.tsx
+└── test/
+    └── setup.ts  # テスト環境設定
+```
+
+## 🔄 CI/CD パイプライン
+
+GitHub Actionsを使用した包括的なCI/CDシステムを提供しています。
+
+### 継続的インテグレーション (.github/workflows/ci.yml)
+
+```yaml
+# 主要な機能
+- コード品質チェック (ESLint, Prettier)
+- 型チェック (TypeScript)  
+- テスト実行 (Vitest)
+- セキュリティ監査 (npm audit)
+- マルチNode.jsバージョンテスト (20.x, 22.x)
+- 複数環境ビルド (development, staging, production)
+```
+
+### 自動デプロイメント (.github/workflows/deploy-pages.yml)
+
+```yaml
+# GitHub Pages自動デプロイ
+- mainブランチへのプッシュで自動実行
+- 本番環境設定でビルド
+- GitHub Pages環境への自動デプロイ
+- デプロイ成功/失敗の通知
+```
+
+### セキュリティとメンテナンス
+
+- **Dependabot**: 依存関係の自動アップデート
+- **Security Audit**: 脆弱性の自動検出
+- **Artifact保存**: ビルド成果物の保存と共有
 
 ## 📝 スタイリング
 

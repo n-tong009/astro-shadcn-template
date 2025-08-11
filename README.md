@@ -18,14 +18,17 @@ tracking.
 
 - **Astro v5**: Fast and modern static site generator
 - **TailwindCSS v4**: Latest utility-first CSS framework
-- **shadcn/ui**: Reusable and customizable UI components
+- **[shadcn/ui](#-using-shadcnui)**: Reusable and customizable UI components
 - **React Integration**: Use React components within Astro
 - **TypeScript**: Type-safe development environment
 - **Environment Configuration**: Automatic switching between development,
   staging, and production
-- **Sentry**: Error tracking and monitoring
+- **[Sentry](#-error-tracking)**: Error tracking and monitoring
 - **Custom Path Settings**: Flexible configuration for base URLs and asset URLs
 - **GitHub Pages**: Automated deployment with CI/CD pipeline
+- **[ESLint + Prettier](#-code-quality-management)**: Code quality and formatting consistency
+- **[Vitest](#-testing-environment)**: React Testing Library integrated testing environment
+- **[GitHub Actions](#-cicd-pipeline)**: Automated CI/CD, security audits, multi-environment testing
 
 ## 🌐 Live Demo
 
@@ -125,13 +128,22 @@ npm run dev
 
 ## 🔧 Commands
 
-| Command           | Description                                      |
-| :---------------- | :----------------------------------------------- |
-| `npm run dev`     | Start development server (http://localhost:3000) |
-| `npm run build`   | Build for production                             |
-| `npm run stg`     | Build for staging environment                    |
-| `npm run prod`    | Build for production environment                 |
-| `npm run preview` | Preview build results                            |
+| Command               | Description                                      |
+| :-------------------- | :----------------------------------------------- |
+| `npm run dev`         | Start development server (http://localhost:3000) |
+| `npm run build`       | Build for production                             |
+| `npm run stg`         | Build for staging environment                    |
+| `npm run prod`        | Build for production environment                 |
+| `npm run preview`     | Preview build results                            |
+| `npm run lint`        | Run ESLint code quality checks                   |
+| `npm run lint:fix`    | Run ESLint with automatic fixes                  |
+| `npm run format`      | Run Prettier code formatting                     |
+| `npm run format:check` | Check code formatting                           |
+| `npm run type-check`  | Run TypeScript type checking                     |
+| `npm run test`        | Run Vitest tests (watch mode)                    |
+| `npm run test:run`    | Run Vitest tests (single run)                    |
+| `npm run test:ui`     | Run Vitest tests in browser                      |
+| `npm run test:coverage` | Run tests with coverage report                 |
 
 ## ⚙️ Environment Configuration
 
@@ -585,6 +597,190 @@ Monitoring in production:
 - Real-time error tracking in Sentry dashboard
 - Visualization of error frequency and affected users
 - Automatic collection of stack traces and environment information
+
+## 🧹 Code Quality Management
+
+This project provides an integrated code quality management system with ESLint and Prettier.
+
+### ESLint Configuration
+
+Adopts modern Flat Config format and provides the following features:
+
+- **TypeScript Support**: Type-safe code analysis with `@typescript-eslint`
+- **React Support**: Integrates React Hooks and accessibility rules
+- **Astro Support**: Linting for `.astro` files
+- **Custom Rules**: Apply project-specific coding standards
+
+### Prettier Configuration
+
+Automatic code formatting unification features:
+
+- **Astro Plugin**: Proper formatting for `.astro` files
+- **Save on Format**: Automatic formatting on file save in VSCode
+- **Batch Formatting**: Code unification across the entire project
+
+### Configuration Files
+
+```javascript
+// eslint.config.js - Flat Config format
+export default [
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      globals: { console: 'readonly', process: 'readonly' }
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+      'react': reactPlugin,
+      'jsx-a11y': jsxA11yPlugin
+    }
+  },
+  ...astroPlugin.configs['flat/recommended']
+];
+```
+
+### VSCode Integration
+
+Development environment optimization with `.vscode/settings.json`:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.experimental.useFlatConfig": true
+}
+```
+
+### Code Quality Commands
+
+```bash
+# ESLint checks
+npm run lint
+
+# Automatic fixes
+npm run lint:fix
+
+# Prettier formatting
+npm run format
+
+# Format checking
+npm run format:check
+
+# TypeScript type checking
+npm run type-check
+```
+
+### Integrated Workflow
+
+1. **Development**: Automatic formatting on file save
+2. **Pre-commit**: Manual lint execution for quality assurance
+3. **CI/CD**: Automatic quality checks with GitHub Actions
+4. **Pre-deployment**: Comprehensive validation including type checking
+
+## 🧪 Testing Environment
+
+This project integrates Vitest and React Testing Library as a modern testing environment.
+
+### Vitest Features
+
+- **Fast execution**: Vite-based high-speed test runner
+- **ES Modules support**: Native support for modern JavaScript environments
+- **Watch mode**: Automatic test execution monitoring file changes
+- **Coverage**: Built-in code coverage functionality
+- **UI mode**: Browser-based test execution and debugging
+
+### Test Configuration
+
+`vitest.config.ts` provides configuration optimized for Astro projects:
+
+```typescript
+export default defineConfig(
+  getViteConfig({
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts']
+    }
+  })
+);
+```
+
+### React Testing Library Integration
+
+Testing utilities specialized for React component testing:
+
+```typescript
+// src/test/setup.ts
+import '@testing-library/jest-dom';
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+
+afterEach(() => {
+  cleanup();
+});
+```
+
+### Test Commands
+
+```bash
+# Run tests in watch mode
+npm run test
+
+# Run tests once
+npm run test:run
+
+# Run tests in browser UI
+npm run test:ui
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### Test File Placement
+
+```text
+src/
+├── components/
+│   ├── ui/
+│   │   ├── button.tsx
+│   │   └── button.test.tsx  # Test files
+│   └── Welcome.test.tsx
+└── test/
+    └── setup.ts  # Test environment setup
+```
+
+## 🔄 CI/CD Pipeline
+
+Provides a comprehensive CI/CD system using GitHub Actions.
+
+### Continuous Integration (.github/workflows/ci.yml)
+
+```yaml
+# Key features
+- Code quality checks (ESLint, Prettier)
+- Type checking (TypeScript)
+- Test execution (Vitest)
+- Security audit (npm audit)
+- Multi-Node.js version testing (20.x, 22.x)
+- Multi-environment builds (development, staging, production)
+```
+
+### Automated Deployment (.github/workflows/deploy-pages.yml)
+
+```yaml
+# GitHub Pages automated deployment
+- Automatic execution on push to main branch
+- Build with production environment settings
+- Automatic deployment to GitHub Pages environment
+- Deploy success/failure notifications
+```
+
+### Security and Maintenance
+
+- **Dependabot**: Automatic dependency updates
+- **Security Audit**: Automatic vulnerability detection
+- **Artifact Storage**: Build artifact storage and sharing
 
 ## 📝 Styling
 
