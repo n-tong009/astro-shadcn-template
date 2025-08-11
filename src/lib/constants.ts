@@ -7,24 +7,24 @@ export const isProd = process.env.NODE_ENV === 'production';
 
 // NODE_ENVに基づいてURLを設定
 export const setSiteUrl = {
-  "SITE_URL": {
-    "DEV": "http://dev.hoge.com/",
-    "STG": "http://stg.hoge.com/",
-    "PROD": "http://prod.hoge.com/"
+  SITE_URL: {
+    DEV: 'http://dev.hoge.com/',
+    STG: 'http://stg.hoge.com/',
+    PROD: 'http://prod.hoge.com/',
   },
-  "BASE_URL": {
-    "STATUS": false,
-    "DEV": "/hoge/",
-    "STG": "/hoge/",
-    "PROD": "/hoge/"
+  BASE_URL: {
+    STATUS: false,
+    DEV: '/hoge/',
+    STG: '/hoge/',
+    PROD: '/hoge/',
   },
-  "ASSETS_URL": {
-    "STATUS": false,
-    "DEV": "http://dev.hoge.assets.com/",
-    "STG": "http://stg.hoge.assets.com/",
-    "PROD": "http://prod.hoge.assets.com/"
-  }
-}
+  ASSETS_URL: {
+    STATUS: false,
+    DEV: 'http://dev.hoge.assets.com/',
+    STG: 'http://stg.hoge.assets.com/',
+    PROD: 'http://prod.hoge.assets.com/',
+  },
+};
 
 // 現在の環境を取得
 export const getCurrentEnv = (): 'DEV' | 'STG' | 'PROD' => {
@@ -63,8 +63,8 @@ export const ASSETS_URL = {
 
 // 現在の環境に基づいたURLを取得する関数
 export const getCurrentSiteUrl = () => SITE_URL[getCurrentEnv()];
-export const getCurrentBaseUrl = () => BASE_URL.STATUS ? BASE_URL[getCurrentEnv()] : '/';
-export const getCurrentAssetsUrl = () => ASSETS_URL.STATUS ? ASSETS_URL[getCurrentEnv()] : '';
+export const getCurrentBaseUrl = () => (BASE_URL.STATUS ? BASE_URL[getCurrentEnv()] : '/');
+export const getCurrentAssetsUrl = () => (ASSETS_URL.STATUS ? ASSETS_URL[getCurrentEnv()] : '');
 
 // サイトの基本情報（環境に応じて動的に設定）
 export const SITE_CONFIG = {

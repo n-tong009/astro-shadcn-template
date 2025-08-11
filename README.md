@@ -2,7 +2,10 @@
 
 # Astro + TailwindCSS + shadcn/ui Template
 
-This project is a comprehensive template with all the features needed for modern web development. It integrates Astro, TailwindCSS v4, shadcn/ui, React, and TypeScript, along with environment-specific build configurations and error tracking.
+This project is a comprehensive template with all the features needed for modern
+web development. It integrates Astro, TailwindCSS v4, shadcn/ui, React, and
+TypeScript, along with environment-specific build configurations and error
+tracking.
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)
@@ -17,7 +20,8 @@ This project is a comprehensive template with all the features needed for modern
 - **shadcn/ui**: Reusable and customizable UI components
 - **React Integration**: Use React components within Astro
 - **TypeScript**: Type-safe development environment
-- **Environment Configuration**: Automatic switching between development, staging, and production
+- **Environment Configuration**: Automatic switching between development,
+  staging, and production
 - **Sentry**: Error tracking and monitoring
 - **Custom Path Settings**: Flexible configuration for base URLs and asset URLs
 
@@ -28,7 +32,8 @@ This project is a comprehensive template with all the features needed for modern
 
 ### Node.js Version Management
 
-We recommend using the following tools to manage the specified Node.js version for this project:
+We recommend using the following tools to manage the specified Node.js version
+for this project:
 
 - [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager
 - [fnm](https://github.com/Schniz/fnm) - Fast Node Manager
@@ -112,57 +117,61 @@ npm run dev
 
 ## 🔧 Commands
 
-| Command | Description |
-|:--------|:------------|
-| `npm run dev` | Start development server (http://localhost:3000) |
-| `npm run build` | Build for production |
-| `npm run stg` | Build for staging environment |
-| `npm run prod` | Build for production environment |
-| `npm run preview` | Preview build results |
+| Command           | Description                                      |
+| :---------------- | :----------------------------------------------- |
+| `npm run dev`     | Start development server (http://localhost:3000) |
+| `npm run build`   | Build for production                             |
+| `npm run stg`     | Build for staging environment                    |
+| `npm run prod`    | Build for production environment                 |
+| `npm run preview` | Preview build results                            |
 
 ## ⚙️ Environment Configuration
 
 ### Environment Variables and URL Settings
 
-This project adopts a flexible configuration system that allows different URLs for development, staging, and production environments.
+This project adopts a flexible configuration system that allows different URLs
+for development, staging, and production environments.
 
 ```typescript
 // src/lib/constants.ts
 export const setSiteUrl = {
-  "SITE_URL": {
-    "DEV": "http://dev.hoge.com/",
-    "STG": "http://stg.hoge.com/",
-    "PROD": "http://prod.hoge.com/"
+  SITE_URL: {
+    DEV: 'http://dev.hoge.com/',
+    STG: 'http://stg.hoge.com/',
+    PROD: 'http://prod.hoge.com/',
   },
-  "BASE_URL": {
-    "STATUS": false,  // Set to true to enable subdirectory placement
-    "DEV": "/hoge/",
-    "STG": "/hoge/",
-    "PROD": "/hoge/"
+  BASE_URL: {
+    STATUS: false, // Set to true to enable subdirectory placement
+    DEV: '/hoge/',
+    STG: '/hoge/',
+    PROD: '/hoge/',
   },
-  "ASSETS_URL": {
-    "STATUS": false,  // Set to true to enable asset delivery from a different domain
-    "DEV": "http://dev.hoge.assets.com/",
-    "STG": "http://stg.hoge.assets.com/",
-    "PROD": "http://prod.hoge.assets.com/"
-  }
-}
+  ASSETS_URL: {
+    STATUS: false, // Set to true to enable asset delivery from a different domain
+    DEV: 'http://dev.hoge.assets.com/',
+    STG: 'http://stg.hoge.assets.com/',
+    PROD: 'http://prod.hoge.assets.com/',
+  },
+};
 ```
 
 ### URL Configuration Details
 
 #### 1. `SITE_URL` - Site Root URL
+
 - Main domain for each environment
 - Used for OGP, canonical URLs, sitemaps, and other meta information
 - Example: `http://dev.hoge.com/`
 
 #### 2. `BASE_URL` - Subdirectory Placement
+
 - Set `STATUS: true` to place the site in a subdirectory
 - Uses specified path instead of root path
 - Example: `/hoge/` → enables placement like `http://example.com/hoge/`
 - Build output directory automatically adjusts
 
 #### 3. `ASSETS_URL` - Separate Domain Asset Delivery
+
 - Set `STATUS: true` to deliver assets (images, CSS, JS) from a separate domain
 - Useful when using a CDN
 - Asset build paths automatically adjust
@@ -172,8 +181,8 @@ export const setSiteUrl = {
 
 ```typescript
 // Get URLs based on current environment
-const currentSiteUrl = getCurrentSiteUrl();     // e.g., "http://dev.hoge.com/"
-const currentBaseUrl = getCurrentBaseUrl();     // e.g., "/hoge/" or "/"
+const currentSiteUrl = getCurrentSiteUrl(); // e.g., "http://dev.hoge.com/"
+const currentBaseUrl = getCurrentBaseUrl(); // e.g., "/hoge/" or "/"
 const currentAssetsUrl = getCurrentAssetsUrl(); // e.g., "http://dev.hoge.assets.com/" or ""
 
 // Automatic application in build configuration
@@ -198,15 +207,19 @@ npm run stg   # NODE_ENV=staging
 npm run prod  # NODE_ENV=production
 ```
 
-Each command automatically sets appropriate environment variables and applies corresponding URL settings.
+Each command automatically sets appropriate environment variables and applies
+corresponding URL settings.
 
 ## 🎨 Using shadcn/ui
 
-This template integrates shadcn/ui, providing a modern, reusable UI component system. shadcn/ui is a collection of beautiful, accessible, and customizable components.
+This template integrates shadcn/ui, providing a modern, reusable UI component
+system. shadcn/ui is a collection of beautiful, accessible, and customizable
+components.
 
 ### Features of shadcn/ui
 
-- **Copy-and-paste approach**: Components are copied directly into your project for full customization
+- **Copy-and-paste approach**: Components are copied directly into your project
+  for full customization
 - **TailwindCSS-based**: Styling uses TailwindCSS for a consistent design system
 - **Radix UI primitives**: Adopts high-quality, accessible UI primitives
 - **TypeScript support**: Supports type-safe component development
@@ -218,14 +231,14 @@ Settings are defined in `components.json`:
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",      // UI style
-  "rsc": false,             // React Server Components not supported
-  "tsx": true,              // TypeScript/TSX enabled
+  "style": "new-york", // UI style
+  "rsc": false, // React Server Components not supported
+  "tsx": true, // TypeScript/TSX enabled
   "tailwind": {
     "config": "",
     "css": "src/styles/global.css",
-    "baseColor": "gray",    // Base color theme
-    "cssVariables": true,   // Use CSS variables
+    "baseColor": "gray", // Base color theme
+    "cssVariables": true, // Use CSS variables
     "prefix": ""
   },
   "aliases": {
@@ -235,7 +248,7 @@ Settings are defined in `components.json`:
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "iconLibrary": "lucide"   // Use Lucide React icons
+  "iconLibrary": "lucide" // Use Lucide React icons
 }
 ```
 
@@ -293,7 +306,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 <Dialog>
   <DialogTrigger asChild>
@@ -306,7 +319,7 @@ import {
     </DialogHeader>
     {/* Content */}
   </DialogContent>
-</Dialog>
+</Dialog>;
 ```
 
 #### Custom Component Implementation Example
@@ -315,20 +328,28 @@ import {
 
 ```tsx
 // src/components/SettingsDialog.tsx
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
-import { useState, useEffect } from "react";
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Switch } from '@/components/ui/switch';
+import { useState, useEffect } from 'react';
 
 const SettingsDialog = () => {
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState('system');
   // ...state management and theme switching logic
-  
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">Settings</Button>
+        <Button variant='ghost' size='icon'>
+          Settings
+        </Button>
       </DialogTrigger>
       {/* ... */}
     </Dialog>
@@ -358,27 +379,25 @@ Added components are placed in `src/components/ui/` and can be edited directly:
 
 ```tsx
 // Example customization of src/components/ui/button.tsx
-const buttonVariants = cva(
-  "inline-flex items-center justify-center...",
-  {
-    variants: {
-      variant: {
-        // Add custom variant
-        brand: "bg-brand text-white hover:bg-brand/90",
-      },
-      // ...
+const buttonVariants = cva('inline-flex items-center justify-center...', {
+  variants: {
+    variant: {
+      // Add custom variant
+      brand: 'bg-brand text-white hover:bg-brand/90',
     },
-  }
-)
+    // ...
+  },
+});
 ```
 
 ### TailwindCSS Integration
 
-shadcn/ui components use TailwindCSS classes and fully integrate with the project's theme:
+shadcn/ui components use TailwindCSS classes and fully integrate with the
+project's theme:
 
 ```tsx
 // Combining with TailwindCSS utilities
-<Button className="mt-4 w-full">Full Width Button</Button>
+<Button className='mt-4 w-full'>Full Width Button</Button>
 ```
 
 ### Usage in Astro Environment
@@ -388,14 +407,12 @@ Use as React components within Astro components:
 ```astro
 ---
 // src/pages/index.astro
-import { Button } from "@/components/ui/button";
-import SettingsDialog from "@/components/SettingsDialog";
+import { Button } from '@/components/ui/button';
+import SettingsDialog from '@/components/SettingsDialog';
 ---
 
 <Layout>
-  <Button client:load>
-    Click me
-  </Button>
+  <Button client:load> Click me </Button>
   <SettingsDialog client:load />
 </Layout>
 ```
@@ -426,13 +443,18 @@ import { cn } from "@/lib/utils";
 
 ### Notes
 
-- Components are copied directly into the project, so updates must be done manually
-- As React components, appropriate client directives are required in Astro environments
-- shadcn/ui components are fully customizable and can be freely modified to meet project requirements
+- Components are copied directly into the project, so updates must be done
+  manually
+- As React components, appropriate client directives are required in Astro
+  environments
+- shadcn/ui components are fully customizable and can be freely modified to meet
+  project requirements
 
 ## 🔒 Error Tracking
 
-This project integrates a comprehensive error tracking system using Sentry. It automates error monitoring in production environments and supports debugging through console logging in development.
+This project integrates a comprehensive error tracking system using Sentry. It
+automates error monitoring in production environments and supports debugging
+through console logging in development.
 
 ### Basic Configuration
 
@@ -444,6 +466,7 @@ SENTRY_DSN=your_sentry_dsn_here
 ### Feature Overview
 
 #### 1. Automatic Initialization
+
 Sentry is automatically initialized in `astro.config.mjs`:
 
 ```javascript
@@ -453,6 +476,7 @@ initSentry(); // Initialize Sentry at Astro startup
 ```
 
 #### 2. Environment-specific Behavior
+
 - **Production**: Automatically sends errors to Sentry
 - **Development**: Outputs errors to console (no Sentry submission)
 
@@ -491,11 +515,7 @@ try {
 // API error reporting
 const response = await fetch('/api/data');
 if (!response.ok) {
-  captureHttpError(
-    '/api/data',
-    response.status,
-    await response.text()
-  );
+  captureHttpError('/api/data', response.status, await response.text());
 }
 
 // Sending warnings
@@ -532,7 +552,7 @@ Sentry initialization settings can be customized:
 // src/lib/sentry.ts
 Sentry.init({
   dsn: SENTRY_DSN,
-  tracesSampleRate: 1.0,  // Performance trace sampling rate
+  tracesSampleRate: 1.0, // Performance trace sampling rate
   // Additional configuration options can be set as needed
 });
 ```
@@ -553,6 +573,7 @@ npm run dev
 ```
 
 Monitoring in production:
+
 - Real-time error tracking in Sentry dashboard
 - Visualization of error frequency and affected users
 - Automatic collection of stack traces and environment information
@@ -565,8 +586,8 @@ TailwindCSS v4 introduces more flexible customization and new syntax:
 
 ```css
 /* global.css */
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 /* Custom variant definitions */
 @custom-variant dark (&:is(.dark *));
@@ -610,16 +631,16 @@ Dark mode feature synchronized with system settings:
 ```tsx
 // Implementation example in SettingsDialog
 const applyTheme = (selectedTheme: string) => {
-  if (selectedTheme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else if (selectedTheme === "light") {
-    document.documentElement.classList.remove("dark");
+  if (selectedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else if (selectedTheme === 'light') {
+    document.documentElement.classList.remove('dark');
   } else {
     // system
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.classList.add("dark");
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
     }
   }
 };
@@ -631,10 +652,13 @@ const applyTheme = (selectedTheme: string) => {
 
 The following features are configured in `astro.config.mjs`:
 
-1. **Cleanup processing**: Automatically deletes unnecessary files after build completion
+1. **Cleanup processing**: Automatically deletes unnecessary files after build
+   completion
 2. **Asset optimization**: Controls inlining and customizes asset paths
-3. **Environment-specific settings**: Applies different settings for development, staging, and production
-4. **HTML Auto-formatting**: Automatically formats HTML as part of the build process
+3. **Environment-specific settings**: Applies different settings for
+   development, staging, and production
+4. **HTML Auto-formatting**: Automatically formats HTML as part of the build
+   process
 
 ```javascript
 export default defineConfig({
@@ -648,26 +672,28 @@ export default defineConfig({
     react(),
     // HTML formatting plugin (integrated into the build process)
     htmlBeautifier({
-      parser: "html",
+      parser: 'html',
       tabWidth: 2,
       useTabs: true,
       printWidth: 120,
-      htmlWhitespaceSensitivity: "css"
+      htmlWhitespaceSensitivity: 'css',
     }),
     {
       name: 'clean-dist-folder',
       hooks: {
         'astro:build:done': async ({ dir }) => {
           // Automatically deletes .DS_Store, Thumbs.db, __MACOSX, etc.
-        }
-      }
-    }
+        },
+      },
+    },
   ],
   // ...
 });
 ```
 
-> **Note**: HTML formatting is automatically integrated into the Astro build process, and no additional commands need to be executed. Simply running `npm run build` will generate formatted HTML files in the build output.
+> **Note**: HTML formatting is automatically integrated into the Astro build
+> process, and no additional commands need to be executed. Simply running
+> `npm run build` will generate formatted HTML files in the build output.
 
 ### Vite Configuration Details
 
@@ -711,7 +737,7 @@ const {
   ogType = DEFAULT_PAGE_META.ogType,
   ogImage = DEFAULT_PAGE_META.ogImage,
   noindex = false,
-  nofollow = false
+  nofollow = false,
 } = props;
 
 // URL path generation
@@ -720,8 +746,11 @@ const ogImageURL = new URL(ogImage, Astro.site || SITE_CONFIG.url);
 ---
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5">
+  <meta charset='UTF-8' />
+  <meta
+    name='viewport'
+    content='width=device-width,initial-scale=1.0,maximum-scale=5'
+  />
   <title>{title} | {SITE_CONFIG.name}</title>
   <!-- SEO, OGP, Twitter Card, etc. -->
 </head>
@@ -736,7 +765,8 @@ import type { PageMeta } from '@/lib/constants';
 
 const meta: PageMeta = {
   title: 'Astro + TailwindCSS + shadcn/ui Template',
-  description: 'A comprehensive template with all the features needed for modern web development',
+  description:
+    'A comprehensive template with all the features needed for modern web development',
   ogType: 'website',
 };
 ---
@@ -768,8 +798,8 @@ Configure paths starting with `@/` in `tsconfig.json`:
 This enables imports like:
 
 ```typescript
-import { Button } from "@/components/ui/button";
-import { SITE_CONFIG } from "@/lib/constants";
+import { Button } from '@/components/ui/button';
+import { SITE_CONFIG } from '@/lib/constants';
 ```
 
 ## 🚀 Deployment
@@ -791,7 +821,8 @@ npm run prod
 
 - Files are generated in the `dist/` directory according to environment
 - Assets are placed in appropriate paths based on environment settings
-- When BASE_URL is enabled, output directory is automatically adjusted (e.g., `dist/hoge/`)
+- When BASE_URL is enabled, output directory is automatically adjusted (e.g.,
+  `dist/hoge/`)
 
 ### Environment-specific Optimization
 

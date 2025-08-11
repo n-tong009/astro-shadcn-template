@@ -1,0 +1,73 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # 毎週月曜日 9:00 JST (00:00 UTC) に実行
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: Update dependencies
+        run: |
+          # パッチバージョンの更新
+          pnpm update
+          
+          # 依存関係の情報をログ出力
+          echo "=== Updated dependencies ==="
+          git diff --name-only
+
+      - name: Run tests after update
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm type-check
+          pnpm lint
+          pnpm test:run
+          pnpm build
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: dependency-updates
+          commit-message: 'chore: update dependencies'
+          title: '🔄 Weekly Dependency Updates'
+          body: |
+            ## 📦 Dependency Updates
+
+            This PR contains weekly dependency updates.
+
+            ### 🔍 Changes
+            - Updated patch versions of dependencies
+            - All tests are passing
+            - Build is successful
+
+            ### ✅ Verification
+            - [x] TypeScript type check passed
+            - [x] ESLint check passed  
+            - [x] All tests passed
+            - [x] Build successful
+
+            ---
+            🤖 This PR was created automatically by GitHub Actions.
+          delete-branch: true

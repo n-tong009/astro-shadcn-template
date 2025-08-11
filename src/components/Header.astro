@@ -1,27 +1,30 @@
 ---
 // src/components/Header.astro
-import { Button } from "@/components/ui/button";
-import HelpDialog from "./HelpDialog";
-import SettingsDialog from "./SettingsDialog";
+import { Button } from '@/components/ui/button';
+import HelpDialog from './HelpDialog';
+import SettingsDialog from './SettingsDialog';
 import { SITE_CONFIG } from '@/lib/constants';
 ---
 
-<header class="header absolute top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-  <div class="header_wrap container flex h-14 items-center mx-auto px-4">
-    <div class="mr-4 flex flex-1">
-      <a href="/" class="flex items-center space-x-2">
-        <span class="font-bold text-base sm:text-lg md:text-xl truncate">astro-shadcn-template</span>
+<header
+  class='header absolute top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+>
+  <div class='header_wrap container flex h-14 items-center mx-auto px-4'>
+    <div class='mr-4 flex flex-1'>
+      <a href='/' class='flex items-center space-x-2'>
+        <span class='font-bold text-base sm:text-lg md:text-xl truncate'>astro-shadcn-template</span>
       </a>
     </div>
-    <div class="flex flex-1 items-center justify-end space-x-2">
+    <div class='flex flex-1 items-center justify-end space-x-2'>
       <HelpDialog client:load />
       <SettingsDialog client:load />
     </div>
   </div>
 </header>
 
-<style lang="scss">
+<style lang='scss'>
   .header {
-    .header_wrap {}
+    .header_wrap {
+    }
   }
 </style>

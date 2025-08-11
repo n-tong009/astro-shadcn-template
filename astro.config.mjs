@@ -23,9 +23,7 @@ const assetsUrl = getCurrentAssetsUrl();
 const outDirUrl = `./dist${getCurrentBaseUrl()}`; // 最後のスラッシュは削除
 
 // ASSETS_URLが有効な場合のアセット出力先を設定
-const assetsDir = ASSETS_URL.STATUS ? 
-  new URL(assetsUrl).pathname.replace(/^\//, '') : 
-  '_astro';
+const assetsDir = ASSETS_URL.STATUS ? new URL(assetsUrl).pathname.replace(/^\//, '') : '_astro';
 
 export default defineConfig({
   site: siteUrl,
@@ -46,11 +44,11 @@ export default defineConfig({
     react(),
     // HTML整形プラグインを追加
     htmlBeautifier({
-      parser: "html",
+      parser: 'html',
       tabWidth: 2,
       useTabs: true,
       printWidth: 120,
-      htmlWhitespaceSensitivity: "css"
+      htmlWhitespaceSensitivity: 'css',
     }),
     {
       // ビルド後のフォルダをクリーンアップするプラグイン名
@@ -94,25 +92,24 @@ export default defineConfig({
             // コンソールに詳細なエラー情報を出力
             console.error('--- Clean-up Dist Folder Error ---');
             console.error(`Error Message: ${error.message}`); // エラーメッセージ
-            console.error(`Stack Trace: ${error.stack}`);     // スタックトレース情報
+            console.error(`Stack Trace: ${error.stack}`); // スタックトレース情報
             console.error('-----------------------------------');
 
             // Sentryにエラーを送信（本番環境で詳細なエラー追跡ができるよう）
             // src/lib/sentry.tsで定義されたcaptureExceptionメソッドを使用
             captureException(error);
           }
-          
-        }
-      }
-    }
+        },
+      },
+    },
   ],
   devToolbar: {
-    enabled: false // Astro標準搭載のツールバー表示有無
+    enabled: false, // Astro標準搭載のツールバー表示有無
   },
-  server: (e) => ({
+  server: e => ({
     port: e.command === 'dev' ? 3000 : 4321,
     host: true, // ローカルネットワーク上の他のデバイスからもアクセス可能にしています。
-    open: true  // サーバー起動時に自動的にブラウザを開くかどうかの設定
+    open: true, // サーバー起動時に自動的にブラウザを開くかどうかの設定
   }),
   vite: {
     plugins: [tailwindcss()],
@@ -121,15 +118,15 @@ export default defineConfig({
       assetsInlineLimit: 0, // 4KB以下の時に自動的にインラインで埋め込まれてしまうのを防ぐ
       rollupOptions: {
         output: {
-          entryFileNames: (entryInfo) => {
+          entryFileNames: entryInfo => {
             return `assets/js/[name].js`; // 必要に応じて.[hash]もつけれます。
           },
           // アセットファイル名のカスタマイズ（必要に応じて）
-          assetFileNames: (assetInfo) => {
+          assetFileNames: assetInfo => {
             if (ASSETS_URL.STATUS) {
               // ASSETS_URLが有効な場合、特定のパス構造を維持
-              const info = assetInfo.name.split('.')
-              const extType = info[info.length - 1]
+              const info = assetInfo.name.split('.');
+              const extType = info[info.length - 1];
               if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
                 return `assets/images/[name][extname]`;
               } else if (/css/i.test(extType)) {
@@ -142,19 +139,20 @@ export default defineConfig({
               // デフォルトの出力パターン
               return `_astro/[name].[hash][extname]`;
             }
-          }
-        }
-      }
+          },
+        },
+      },
     },
     css: {
       preprocessorOptions: {
-        scss: { // Deprecation [legacy-js-api]が出るので対処
-          api: "modern-compiler",
+        scss: {
+          // Deprecation [legacy-js-api]が出るので対処
+          api: 'modern-compiler',
           // additionalData: `@use '@/assets/stylesheets/app.scss' as app;`
         },
       },
     },
     // 本番ビルドでのみconsole、debuggerを非表示する設定
-    esbuild: (process.env.NODE_ENV === 'production' ) ? { drop: ['console', 'debugger'] } : {},
-  }
+    esbuild: process.env.NODE_ENV === 'production' ? { drop: ['console', 'debugger'] } : {},
+  },
 });
