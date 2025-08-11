@@ -28,7 +28,7 @@ const assetsDir = ASSETS_URL.STATUS ? new URL(assetsUrl).pathname.replace(/^\//,
 export default defineConfig({
   site: process.env.PUBLIC_BASE_URL ? 'https://n-tong009.github.io' : siteUrl,
   base: process.env.PUBLIC_BASE_URL ? process.env.PUBLIC_BASE_URL : baseUrl,
-  outDir: outDirUrl,
+  outDir: process.env.PUBLIC_BASE_URL ? './dist' : outDirUrl,
   compressHTML: false, // htmlを圧縮するか否か デフォルトでは圧縮を解除しています。
   build: {
     // スタイルシートをインライン化するかどうか
