@@ -27,7 +27,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "build:github": "cross-env PUBLIC_BASE_URL=/astro-shadcn-template/ pnpm build"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.5",

@@ -26,8 +26,8 @@ const outDirUrl = `./dist${getCurrentBaseUrl()}`; // 最後のスラッシュは
 const assetsDir = ASSETS_URL.STATUS ? new URL(assetsUrl).pathname.replace(/^\//, '') : '_astro';
 
 export default defineConfig({
-  site: siteUrl,
-  base: baseUrl,
+  site: process.env.PUBLIC_BASE_URL ? 'https://n-tong009.github.io' : siteUrl,
+  base: process.env.PUBLIC_BASE_URL ? process.env.PUBLIC_BASE_URL : baseUrl,
   outDir: outDirUrl,
   compressHTML: false, // htmlを圧縮するか否か デフォルトでは圧縮を解除しています。
   build: {

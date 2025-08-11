@@ -55,6 +55,8 @@ jobs:
         env:
           # GitHub Pages用の設定
           NODE_ENV: production
+          # GitHub Pagesのベースパス設定
+          PUBLIC_BASE_URL: /astro-shadcn-template/
 
       - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3

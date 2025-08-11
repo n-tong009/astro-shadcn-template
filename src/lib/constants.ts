@@ -63,7 +63,13 @@ export const ASSETS_URL = {
 
 // 現在の環境に基づいたURLを取得する関数
 export const getCurrentSiteUrl = () => SITE_URL[getCurrentEnv()];
-export const getCurrentBaseUrl = () => (BASE_URL.STATUS ? BASE_URL[getCurrentEnv()] : '/');
+export const getCurrentBaseUrl = () => {
+  // GitHub Pages用の特別処理
+  if (process.env.PUBLIC_BASE_URL) {
+    return process.env.PUBLIC_BASE_URL;
+  }
+  return BASE_URL.STATUS ? BASE_URL[getCurrentEnv()] : '/';
+};
 export const getCurrentAssetsUrl = () => (ASSETS_URL.STATUS ? ASSETS_URL[getCurrentEnv()] : '');
 
 // サイトの基本情報（環境に応じて動的に設定）
