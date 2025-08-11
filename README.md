@@ -7,7 +7,8 @@ web development. It integrates Astro, TailwindCSS v4, shadcn/ui, React, and
 TypeScript, along with environment-specific build configurations and error
 tracking.
 
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-GitHub_Pages-blue.svg)](https://n-tong009.github.io/astro-shadcn-template/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 ![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)
 ![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)
@@ -24,6 +25,13 @@ tracking.
   staging, and production
 - **Sentry**: Error tracking and monitoring
 - **Custom Path Settings**: Flexible configuration for base URLs and asset URLs
+- **GitHub Pages**: Automated deployment with CI/CD pipeline
+
+## 🌐 Live Demo
+
+**[👆 View Live Demo](https://n-tong009.github.io/astro-shadcn-template/)**
+
+Experience the template in action with our hosted demo on GitHub Pages.
 
 ## ⚡️ Requirements
 

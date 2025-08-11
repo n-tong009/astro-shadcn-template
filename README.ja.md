@@ -5,7 +5,8 @@
 このプロジェクトは、モダンなWeb開発に必要な機能を備えた包括的なテンプレートです。Astro、TailwindCSS
 v4、shadcn/ui、React、TypeScriptを統合し、環境別のビルド設定とエラートラッキングも含まれています。
 
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+[![Live Demo](https://img.shields.io/badge/🚀_デモサイト-GitHub_Pages-blue.svg)](https://n-tong009.github.io/astro-shadcn-template/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 ![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)
 ![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)
@@ -21,6 +22,13 @@ v4、shadcn/ui、React、TypeScriptを統合し、環境別のビルド設定と
 - **環境別設定**: 開発・ステージング・本番環境の自動切り替え
 - **Sentry**: エラートラッキングと監視
 - **カスタムパス設定**: ベースURL、アセットURLの柔軟な設定
+- **GitHub Pages**: CI/CDパイプラインによる自動デプロイ
+
+## 🌐 デモサイト
+
+**[👆 ライブデモを見る](https://n-tong009.github.io/astro-shadcn-template/)**
+
+GitHub Pagesでホストされているデモサイトで、このテンプレートの動作を確認できます。
 
 ## ⚡️ 必要環境
 
