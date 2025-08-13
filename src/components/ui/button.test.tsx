@@ -11,13 +11,13 @@ describe('Button component', () => {
   });
 
   it('applies correct variant classes', () => {
-    render(<Button variant="destructive">Destructive Button</Button>);
+    render(<Button variant='destructive'>Destructive Button</Button>);
     const button = screen.getByRole('button');
     expect(button).toHaveClass('bg-destructive');
   });
 
   it('applies correct size classes', () => {
-    render(<Button size="lg">Large Button</Button>);
+    render(<Button size='lg'>Large Button</Button>);
     const button = screen.getByRole('button');
     expect(button).toHaveClass('h-10', 'px-6');
   });
@@ -25,10 +25,10 @@ describe('Button component', () => {
   it('handles click events', async () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
-    
+
     render(<Button onClick={handleClick}>Click Me</Button>);
     const button = screen.getByRole('button');
-    
+
     await user.click(button);
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -40,7 +40,7 @@ describe('Button component', () => {
   });
 
   it('accepts custom className', () => {
-    render(<Button className="custom-class">Custom Button</Button>);
+    render(<Button className='custom-class'>Custom Button</Button>);
     const button = screen.getByRole('button');
     expect(button).toHaveClass('custom-class');
   });

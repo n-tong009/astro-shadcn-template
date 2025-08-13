@@ -9,10 +9,10 @@ tracking.
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-GitHub_Pages-blue.svg)](https://n-tong009.github.io/astro-shadcn-template/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)
-![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)
-![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.5.0-000000)
+[![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)](https://react.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.5.0-09090b)](https://ui.shadcn.com/)
 
 ## 🚀 Features
 
@@ -26,9 +26,14 @@ tracking.
 - **[Sentry](#-error-tracking)**: Error tracking and monitoring
 - **Custom Path Settings**: Flexible configuration for base URLs and asset URLs
 - **GitHub Pages**: Automated deployment with CI/CD pipeline
-- **[ESLint + Prettier](#-code-quality-management)**: Code quality and formatting consistency
-- **[Vitest](#-testing-environment)**: React Testing Library integrated testing environment
-- **[GitHub Actions](#-cicd-pipeline)**: Automated CI/CD, security audits, multi-environment testing
+- **[ESLint + Prettier](#-code-quality-management)**: Code quality and
+  formatting consistency
+- **[Vitest](#-testing-environment)**: React Testing Library integrated testing
+  environment
+- **[GitHub Actions](#-cicd-pipeline)**: Automated CI/CD, security audits,
+  multi-environment testing
+- **[Centralized Type Definitions](#-type-definitions-directory)**: Dedicated
+  `src/types/` directory with ESLint enforcement for TypeScript types only
 
 ## 🌐 Live Demo
 
@@ -103,8 +108,15 @@ The project includes Volta configuration, pinned in package.json as follows:
 │   ├── pages/                 # Page components
 │   │   ├── index.astro        # Homepage
 │   │   └── hoge/              # Subdirectory page example
-│   └── styles/                # Global styles
-│       └── global.css         # TailwindCSS and variable definitions
+│   ├── styles/                # Global styles
+│   │   └── global.css         # TailwindCSS and variable definitions
+│   └── types/                 # **TypeScript type definitions (types only)**
+│       ├── index.ts           # All type definitions export
+│       ├── common.ts          # Common types
+│       ├── api.ts             # API-related types
+│       ├── ui.ts              # UI component types
+│       ├── page.ts            # Page and metadata types
+│       └── environment.ts     # Environment and configuration types
 ├── LICENSE                    # License
 ├── astro.config.mjs           # Astro configuration
 ├── tailwind.config.js         # TailwindCSS configuration
@@ -128,22 +140,22 @@ npm run dev
 
 ## 🔧 Commands
 
-| Command               | Description                                      |
-| :-------------------- | :----------------------------------------------- |
-| `npm run dev`         | Start development server (http://localhost:3000) |
-| `npm run build`       | Build for production                             |
-| `npm run stg`         | Build for staging environment                    |
-| `npm run prod`        | Build for production environment                 |
-| `npm run preview`     | Preview build results                            |
-| `npm run lint`        | Run ESLint code quality checks                   |
-| `npm run lint:fix`    | Run ESLint with automatic fixes                  |
-| `npm run format`      | Run Prettier code formatting                     |
-| `npm run format:check` | Check code formatting                           |
-| `npm run type-check`  | Run TypeScript type checking                     |
-| `npm run test`        | Run Vitest tests (watch mode)                    |
-| `npm run test:run`    | Run Vitest tests (single run)                    |
-| `npm run test:ui`     | Run Vitest tests in browser                      |
-| `npm run test:coverage` | Run tests with coverage report                 |
+| Command                 | Description                                      |
+| :---------------------- | :----------------------------------------------- |
+| `npm run dev`           | Start development server (http://localhost:3000) |
+| `npm run build`         | Build for production                             |
+| `npm run stg`           | Build for staging environment                    |
+| `npm run prod`          | Build for production environment                 |
+| `npm run preview`       | Preview build results                            |
+| `npm run lint`          | Run ESLint code quality checks                   |
+| `npm run lint:fix`      | Run ESLint with automatic fixes                  |
+| `npm run format`        | Run Prettier code formatting                     |
+| `npm run format:check`  | Check code formatting                            |
+| `npm run type-check`    | Run TypeScript type checking                     |
+| `npm run test`          | Run Vitest tests (watch mode)                    |
+| `npm run test:run`      | Run Vitest tests (single run)                    |
+| `npm run test:ui`       | Run Vitest tests in browser                      |
+| `npm run test:coverage` | Run tests with coverage report                   |
 
 ## ⚙️ Environment Configuration
 
@@ -600,7 +612,8 @@ Monitoring in production:
 
 ## 🧹 Code Quality Management
 
-This project provides an integrated code quality management system with ESLint and Prettier.
+This project provides an integrated code quality management system with ESLint
+and Prettier.
 
 ### ESLint Configuration
 
@@ -628,15 +641,15 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
       parser: tsParser,
-      globals: { console: 'readonly', process: 'readonly' }
+      globals: { console: 'readonly', process: 'readonly' },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      'react': reactPlugin,
-      'jsx-a11y': jsxA11yPlugin
-    }
+      react: reactPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+    },
   },
-  ...astroPlugin.configs['flat/recommended']
+  ...astroPlugin.configs['flat/recommended'],
 ];
 ```
 
@@ -680,7 +693,8 @@ npm run type-check
 
 ## 🧪 Testing Environment
 
-This project integrates Vitest and React Testing Library as a modern testing environment.
+This project integrates Vitest and React Testing Library as a modern testing
+environment.
 
 ### Vitest Features
 
@@ -700,8 +714,8 @@ export default defineConfig(
     test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: ['./src/test/setup.ts']
-    }
+      setupFiles: ['./src/test/setup.ts'],
+    },
   })
 );
 ```
@@ -1004,7 +1018,53 @@ This enables imports like:
 ```typescript
 import { Button } from '@/components/ui/button';
 import { SITE_CONFIG } from '@/lib/constants';
+import type { PageMeta, ApiResponse } from '@/types';
 ```
+
+### Type Definitions Directory
+
+The `src/types/` directory is **dedicated exclusively to TypeScript type
+definitions**:
+
+#### 📁 Directory Structure and Purpose
+
+```text
+src/types/
+├── index.ts           # Central export for all type definitions
+├── common.ts          # Common utility types (ID, Nullable, AsyncState, etc.)
+├── api.ts             # API-related types (ApiResponse, HttpMethod, etc.)
+├── ui.ts              # UI component types (ButtonProps, DialogProps, etc.)
+├── page.ts            # Page and metadata types (PageMeta, SiteConfig, etc.)
+└── environment.ts     # Environment and configuration types
+```
+
+#### 🔒 Directory Restrictions
+
+- **Type definitions only**: This directory must contain only TypeScript type
+  definitions
+- **No implementation code**: No functions, classes, or runtime code allowed
+- **ESLint enforcement**: Configured rules prevent non-type exports in this
+  directory
+
+#### 📝 Usage Guidelines
+
+```typescript
+// ✅ Correct usage - importing types
+import type { ButtonProps, PageMeta, ApiResponse } from '@/types';
+
+// ✅ Correct usage - importing specific type files
+import type { AsyncState } from '@/types/common';
+import type { HttpMethod } from '@/types/api';
+
+// ❌ Incorrect - runtime imports from types directory
+import { someFunction } from '@/types'; // This will cause ESLint error
+```
+
+#### 🛡️ ESLint Protection
+
+The project includes ESLint rules that enforce type-only exports in the
+`src/types/` directory, ensuring architectural consistency and preventing
+runtime code from being accidentally placed in type definition files.
 
 ## 🚀 Deployment
 
@@ -1062,6 +1122,63 @@ MIT License - see the [LICENSE](./LICENSE) file for details.
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Create a Pull Request
+
+---
+
+## 📝 Recent Updates
+
+### ✨ Type Definitions Centralization (Latest)
+
+**Overview**: Centralized all TypeScript type definitions into a dedicated
+`src/types/` directory with ESLint enforcement.
+
+#### 🎯 What's New
+
+- **Dedicated Types Directory**: Created `src/types/` exclusively for TypeScript
+  type definitions
+- **Comprehensive Type System**: Added organized type definitions covering:
+  - `common.ts` - Utility types (ID, Nullable, AsyncState, LoadingState, etc.)
+  - `api.ts` - API-related types (ApiResponse, HttpMethod, PaginationParams,
+    etc.)
+  - `ui.ts` - UI component types (ButtonProps, DialogProps, SelectProps, etc.)
+  - `page.ts` - Page and metadata types (PageMeta, SiteConfig, SEO types, etc.)
+  - `environment.ts` - Environment and configuration types
+  - `index.ts` - Central export hub for all type definitions
+
+#### 🛡️ ESLint Protection
+
+- **Type-Only Enforcement**: ESLint rules prevent non-type code in `src/types/`
+- **Runtime Code Prevention**: Functions, classes, and variables are blocked
+- **Named Exports Only**: Default exports are not allowed
+- **Development Safety**: Maintains architectural consistency
+
+#### 📦 Usage Examples
+
+```typescript
+// Import all types from central hub
+import type { ButtonProps, PageMeta, ApiResponse } from '@/types';
+
+// Import from specific type files
+import type { AsyncState, LoadingState } from '@/types/common';
+import type { HttpMethod, ApiError } from '@/types/api';
+```
+
+#### 🔧 Technical Details
+
+- **Global Type Extensions**: Properly configured `ImportMetaEnv` and
+  `ProcessEnv` extensions
+- **React Integration**: Full React component type support with proper imports
+- **Browser API Types**: Corrected global type references (Event, MouseEvent,
+  etc.)
+- **ESLint Configuration**: Custom rules targeting `src/types/**/*.ts` files
+
+#### 🎨 Benefits
+
+- **Centralized Management**: All types in one discoverable location
+- **Better IntelliSense**: Improved IDE support and autocompletion
+- **Type Safety**: Comprehensive type coverage across the application
+- **Maintainability**: Clear separation of concerns and easy updates
+- **Developer Experience**: Simplified imports and better code organization
 
 ---
 

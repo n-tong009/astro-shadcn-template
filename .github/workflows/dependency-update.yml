@@ -32,7 +32,7 @@ jobs:
         run: |
           # パッチバージョンの更新
           pnpm update
-          
+
           # 依存関係の情報をログ出力
           echo "=== Updated dependencies ==="
           git diff --name-only

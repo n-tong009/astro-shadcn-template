@@ -4,7 +4,7 @@ on:
   # mainブランチへのプッシュ時に実行
   push:
     branches: [main]
-  
+
   # 手動実行も可能
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
   build:
     name: Build Astro Site
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -68,11 +68,11 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

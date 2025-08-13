@@ -7,10 +7,10 @@ v4、shadcn/ui、React、TypeScriptを統合し、環境別のビルド設定と
 
 [![Live Demo](https://img.shields.io/badge/🚀_デモサイト-GitHub_Pages-blue.svg)](https://n-tong009.github.io/astro-shadcn-template/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)
-![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)
-![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.5.0-000000)
+[![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)](https://react.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.5.0-09090b)](https://ui.shadcn.com/)
 
 ## 🚀 特徴
 
@@ -26,12 +26,15 @@ v4、shadcn/ui、React、TypeScriptを統合し、環境別のビルド設定と
 - **[ESLint + Prettier](#-コード品質管理)**: コード品質とフォーマット統一
 - **[Vitest](#-テスト環境)**: React Testing Library統合テスト環境
 - **[GitHub Actions](#-cicd-パイプライン)**: 自動CI/CD、セキュリティ監査、マルチ環境テスト
+- **[型定義の一元化](#-型定義ディレクトリ)**:
+  TypeScript型専用の`src/types/`ディレクトリとESLint制約
 
 ## 🌐 デモサイト
 
 **[👆 ライブデモを見る](https://n-tong009.github.io/astro-shadcn-template/)**
 
-GitHub Pagesでホストされているデモサイトで、このテンプレートの動作を確認できます。
+GitHub
+Pagesでホストされているデモサイトで、このテンプレートの動作を確認できます。
 
 ## ⚡️ 必要環境
 
@@ -99,8 +102,15 @@ GitHub Pagesでホストされているデモサイトで、このテンプレ�
 > │   ├── pages/                 # ページコンポーネント
 > │   │   ├── index.astro        # トップページ
 > │   │   └── hoge/              # サブディレクトリページ例
-> │   └── styles/                # グローバルスタイル
-> │       └── global.css         # TailwindCSSと変数定義
+> │   ├── styles/                # グローバルスタイル
+> │   │   └── global.css         # TailwindCSSと変数定義
+> │   └── types/                 # **TypeScript型定義（型のみ）**
+> │       ├── index.ts           # 全型定義のエクスポート
+> │       ├── common.ts          # 共通型
+> │       ├── api.ts             # API関連型
+> │       ├── ui.ts              # UIコンポーネント型
+> │       ├── page.ts            # ページとメタデータ型
+> │       └── environment.ts     # 環境・設定型
 > ├── LICENSE                    # ライセンス
 > ├── astro.config.mjs           # Astro設定
 > ├── tailwind.config.js         # TailwindCSS設定
@@ -124,22 +134,22 @@ GitHub Pagesでホストされているデモサイトで、このテンプレ�
 
 ## 🔧 コマンド
 
-| コマンド              | 説明                                        |
-| :-------------------- | :------------------------------------------ |
-| `npm run dev`         | 開発サーバーを起動（http://localhost:3000） |
-| `npm run build`       | 本番用にビルド                              |
-| `npm run stg`         | ステージング環境用にビルド                  |
-| `npm run prod`        | 本番環境用にビルド                          |
-| `npm run preview`     | ビルド結果をプレビュー                      |
-| `npm run lint`        | ESLintによるコード品質チェック              |
-| `npm run lint:fix`    | ESLintによる自動修正                        |
-| `npm run format`      | Prettierによるコードフォーマット            |
-| `npm run format:check` | フォーマット確認                           |
-| `npm run type-check`  | TypeScript型チェック                        |
-| `npm run test`        | Vitestテスト実行（ウォッチモード）           |
-| `npm run test:run`    | Vitestテスト実行（一回実行）                 |
-| `npm run test:ui`     | Vitestテストブラウザ実行                     |
-| `npm run test:coverage` | テストカバレッジ確認                       |
+| コマンド                | 説明                                        |
+| :---------------------- | :------------------------------------------ |
+| `npm run dev`           | 開発サーバーを起動（http://localhost:3000） |
+| `npm run build`         | 本番用にビルド                              |
+| `npm run stg`           | ステージング環境用にビルド                  |
+| `npm run prod`          | 本番環境用にビルド                          |
+| `npm run preview`       | ビルド結果をプレビュー                      |
+| `npm run lint`          | ESLintによるコード品質チェック              |
+| `npm run lint:fix`      | ESLintによる自動修正                        |
+| `npm run format`        | Prettierによるコードフォーマット            |
+| `npm run format:check`  | フォーマット確認                            |
+| `npm run type-check`    | TypeScript型チェック                        |
+| `npm run test`          | Vitestテスト実行（ウォッチモード）          |
+| `npm run test:run`      | Vitestテスト実行（一回実行）                |
+| `npm run test:ui`       | Vitestテストブラウザ実行                    |
+| `npm run test:coverage` | テストカバレッジ確認                        |
 
 ## ⚙️ 環境設定
 
@@ -590,7 +600,7 @@ Sentryの初期化設定をカスタマイズ可能
 
 ### ESLint の設定
 
-モダンなFlat Config形式を採用し、以下の機能を提供：
+モダンなFlat Config形式を採用し、以下の機能を提供
 
 - **TypeScript対応**: `@typescript-eslint`による型安全なコード解析
 - **React対応**: React Hooksやアクセシビリティルールを統合
@@ -599,7 +609,7 @@ Sentryの初期化設定をカスタマイズ可能
 
 ### Prettier の設定
 
-コードフォーマットの自動統一機能：
+コードフォーマットの自動統一機能
 
 - **Astro Plugin**: `.astro`ファイルの適切なフォーマット
 - **保存時自動実行**: VSCodeでファイル保存時に自動フォーマット
@@ -614,21 +624,21 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
       parser: tsParser,
-      globals: { console: 'readonly', process: 'readonly' }
+      globals: { console: 'readonly', process: 'readonly' },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      'react': reactPlugin,
-      'jsx-a11y': jsxA11yPlugin
-    }
+      react: reactPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+    },
   },
-  ...astroPlugin.configs['flat/recommended']
+  ...astroPlugin.configs['flat/recommended'],
 ];
 ```
 
 ### VSCode統合
 
-`.vscode/settings.json`で開発環境を最適化：
+`.vscode/settings.json`で開発環境を最適化
 
 ```json
 {
@@ -647,7 +657,7 @@ npm run lint
 # 自動修正
 npm run lint:fix
 
-# Prettierフォーマット  
+# Prettierフォーマット
 npm run format
 
 # フォーマット確認
@@ -666,7 +676,8 @@ npm run type-check
 
 ## 🧪 テスト環境
 
-このプロジェクトでは、モダンなテスト環境としてVitestとReact Testing Libraryを統合しています。
+このプロジェクトでは、モダンなテスト環境としてVitestとReact Testing
+Libraryを統合しています。
 
 ### Vitest の特徴
 
@@ -678,7 +689,7 @@ npm run type-check
 
 ### テスト設定
 
-`vitest.config.ts`でAstroプロジェクトに最適化された設定を提供：
+`vitest.config.ts`でAstroプロジェクトに最適化された設定を提供
 
 ```typescript
 export default defineConfig(
@@ -686,15 +697,15 @@ export default defineConfig(
     test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: ['./src/test/setup.ts']
-    }
+      setupFiles: ['./src/test/setup.ts'],
+    },
   })
 );
 ```
 
 ### React Testing Library統合
 
-Reactコンポーネントのテストに特化したテスティングユーティリティ：
+Reactコンポーネントのテストに特化したテスティングユーティリティ
 
 ```typescript
 // src/test/setup.ts
@@ -745,7 +756,7 @@ GitHub Actionsを使用した包括的なCI/CDシステムを提供していま�
 ```yaml
 # 主要な機能
 - コード品質チェック (ESLint, Prettier)
-- 型チェック (TypeScript)  
+- 型チェック (TypeScript)
 - テスト実行 (Vitest)
 - セキュリティ監査 (npm audit)
 - マルチNode.jsバージョンテスト (20.x, 22.x)
@@ -988,7 +999,49 @@ HTMLの整形は自動的にAstroのビルドプロセスに統合されてお�
 > ```typescript
 > import { Button } from '@/components/ui/button';
 > import { SITE_CONFIG } from '@/lib/constants';
+> import type { PageMeta, ApiResponse } from '@/types';
 > ```
+
+### 型定義ディレクトリ
+
+`src/types/` ディレクトリは **TypeScript型定義専用** として設計されています。
+
+#### 📁 ディレクトリ構造と目的
+
+> ```text
+> src/types/
+> ├── index.ts           # 全型定義の一元エクスポート
+> ├── common.ts          # 共通ユーティリティ型（ID、Nullable、AsyncState等）
+> ├── api.ts             # API関連型（ApiResponse、HttpMethod等）
+> ├── ui.ts              # UIコンポーネント型（ButtonProps、DialogProps等）
+> ├── page.ts            # ページ・メタデータ型（PageMeta、SiteConfig等）
+> └── environment.ts     # 環境・設定型
+> ```
+
+#### 🔒 ディレクトリ制限
+
+- **型定義のみ**: このディレクトリはTypeScript型定義のみを格納
+- **実装コード禁止**: 関数、クラス、実行時コードは配置不可
+- **ESLint強制**: 設定されたルールにより非型エクスポートを防止
+
+#### 📝 使用ガイドライン
+
+> ```typescript
+> // ✅ 正しい使用法 - 型のインポート
+> import type { ButtonProps, PageMeta, ApiResponse } from '@/types';
+>
+> // ✅ 正しい使用法 - 特定型ファイルからのインポート
+> import type { AsyncState } from '@/types/common';
+> import type { HttpMethod } from '@/types/api';
+>
+> // ❌ 誤った使用法 - typesディレクトリからの実行時インポート
+> import { someFunction } from '@/types'; // ESLintエラーになります
+> ```
+
+#### 🛡️ ESLint保護
+
+プロジェクトには `src/types/`
+ディレクトリで型のみのエクスポートを強制するESLintルールが含まれており、アーキテクチャの一貫性を保ち、型定義ファイルに実行時コードが誤って配置されることを防ぎます。
 
 ## 🚀 デプロイ
 
@@ -1045,6 +1098,59 @@ MIT License - 詳細は[LICENSE](./LICENSE)ファイルを参照してくださ�
 3. 変更をコミット (`git commit -m 'Add amazing feature'`)
 4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. プルリクエストを作成
+
+---
+
+## 📝 最新のアップデート
+
+### ✨ 型定義の一元化 (最新)
+
+**概要**: TypeScript型定義を専用の `src/types/`
+ディレクトリに一元化し、ESLint制約を追加しました。
+
+#### 🎯 新機能
+
+- **専用型ディレクトリ**: TypeScript型定義専用の `src/types/` を作成
+- **包括的型システム**: 整理された型定義を複数領域にわたって追加
+  - `common.ts` - ユーティリティ型（ID、Nullable、AsyncState、LoadingState等）
+  - `api.ts` - API関連型（ApiResponse、HttpMethod、PaginationParams等）
+  - `ui.ts` - UIコンポーネント型（ButtonProps、DialogProps、SelectProps等）
+  - `page.ts` - ページ・メタデータ型（PageMeta、SiteConfig、SEO型等）
+  - `environment.ts` - 環境・設定型
+  - `index.ts` - 全型定義の一元エクスポート
+
+#### 🛡️ ESLint保護
+
+- **型のみ強制**: ESLintルールが `src/types/` での非型コードを防止
+- **実行時コード防止**: 関数、クラス、変数をブロック
+- **名前付きエクスポートのみ**: デフォルトエクスポートは不許可
+- **開発安全性**: アーキテクチャの一貫性を維持
+
+#### 📦 使用例
+
+```typescript
+// 一元ハブからのすべての型インポート
+import type { ButtonProps, PageMeta, ApiResponse } from '@/types';
+
+// 特定型ファイルからのインポート
+import type { AsyncState, LoadingState } from '@/types/common';
+import type { HttpMethod, ApiError } from '@/types/api';
+```
+
+#### 🔧 技術詳細
+
+- **グローバル型拡張**: `ImportMetaEnv` と `ProcessEnv` 拡張を適切に設定
+- **React統合**: 適切なインポートによる完全なReactコンポーネント型サポート
+- **ブラウザAPI型**: グローバル型参照の修正（Event、MouseEvent等）
+- **ESLint設定**: `src/types/**/*.ts` ファイルをターゲットとするカスタムルール
+
+#### 🎨 利点
+
+- **一元管理**: 発見可能な一箇所での全型管理
+- **より良いIntelliSense**: IDE支援とオートコンプリートの改善
+- **型安全性**: アプリケーション全体での包括的型カバレッジ
+- **保守性**: 関心の明確な分離と簡単な更新
+- **開発者体験**: 簡素化されたインポートとより良いコード整理
 
 ---
 

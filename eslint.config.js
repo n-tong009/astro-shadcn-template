@@ -80,6 +80,46 @@ export default [
   // Astroファイル用の設定
   ...astroPlugin.configs['flat/recommended'],
 
+  // src/types/ ディレクトリの型定義専用ルール
+  {
+    files: ['src/types/**/*.ts'],
+    rules: {
+      // 型定義のみ許可
+      '@typescript-eslint/no-unused-vars': 'off', // 型定義では使用されていない型も許可
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ExportDefaultDeclaration',
+          message: 'Default exports are not allowed in type definition files. Use named exports only.',
+        },
+        {
+          selector: 'FunctionDeclaration',
+          message: 'Functions are not allowed in type definition files. This directory is for types only.',
+        },
+        {
+          selector: 'ClassDeclaration',
+          message: 'Classes are not allowed in type definition files. This directory is for types only.',
+        },
+        {
+          selector: 'VariableDeclaration',
+          message: 'Runtime variables are not allowed in type definition files. This directory is for types only.',
+        },
+        {
+          selector: 'ExportNamedDeclaration > VariableDeclaration',
+          message: 'Exported variables are not allowed in type definition files. Use type exports only.',
+        },
+        {
+          selector: 'ExportNamedDeclaration > FunctionDeclaration',
+          message: 'Exported functions are not allowed in type definition files. Use type exports only.',
+        },
+        {
+          selector: 'ExportNamedDeclaration > ClassDeclaration',
+          message: 'Exported classes are not allowed in type definition files. Use type exports only.',
+        },
+      ],
+    },
+  },
+
   // 設定ファイル用のルール緩和
   {
     files: ['**/*.config.{js,mjs,ts}', '**/vite.config.ts', '**/astro.config.mjs'],
