@@ -1,17 +1,17 @@
 // 組み込みモジュール
-import { URL } from 'node:url';
 import { promises as fs } from 'fs';
+import { URL } from 'node:url';
 
 // 外部ライブラリ/フレームワーク
-import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import glob from 'fast-glob';
 import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config';
+import glob from 'fast-glob';
 
 // プロジェクト内モジュール
-import { getCurrentSiteUrl, getCurrentBaseUrl, getCurrentAssetsUrl, ASSETS_URL } from './src/lib/constants.ts';
+import { ASSETS_URL, getCurrentAssetsUrl, getCurrentBaseUrl, getCurrentSiteUrl } from './src/lib/constants.ts';
 import htmlBeautifier from './src/lib/htmlFormatter.js';
-import { initSentry, captureException } from './src/lib/sentry';
+import { captureException, initSentry } from './src/lib/sentry';
 
 // SentryをAstro起動時に初期化
 initSentry();
@@ -107,7 +107,7 @@ export default defineConfig({
     enabled: false, // Astro標準搭載のツールバー表示有無
   },
   server: e => ({
-    port: e.command === 'dev' ? 3000 : 4321,
+    port: e.command === 'dev' ? 4000 : 4321,
     host: true, // ローカルネットワーク上の他のデバイスからもアクセス可能にしています。
     open: true, // サーバー起動時に自動的にブラウザを開くかどうかの設定
   }),

@@ -77,5 +77,20 @@
   },
   
   // Astro関連設定
-  "astro.typescript.enabled": true
+  "astro.typescript.enabled": true,
+  
+  // CSS Lint設定 - Tailwind CSS v4対応
+  "css.lint.unknownAtRules": "ignore",
+  "css.validate": true,
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+  "postcss.validate": false,
+  
+  // Tailwind CSS設定
+  "tailwindCSS.experimental.configFile": "./tailwind.config.js",
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
 }

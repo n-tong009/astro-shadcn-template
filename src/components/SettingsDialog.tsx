@@ -64,7 +64,7 @@ const SettingsDialog = () => {
           </svg>
         </Button>
       </DialogTrigger>
-      <DialogContent className='pt-16 pb-8 max-h-[85dvh] sm:max-h-[80dvh] overflow-y-auto'>
+      <DialogContent className='max-h-[85dvh] overflow-y-auto pt-16 pb-8 sm:max-h-[80dvh]'>
         <DialogHeader>
           <DialogTitle>設定</DialogTitle>
           <DialogDescription>アプリケーションの設定を変更できます。</DialogDescription>
@@ -72,7 +72,7 @@ const SettingsDialog = () => {
         <div className='grid gap-6 py-4'>
           <div className='space-y-4'>
             <div>
-              <h4 className='font-medium mb-3'>外観</h4>
+              <h4 className='mb-3 font-medium'>外観</h4>
               <RadioGroup value={theme} onValueChange={handleThemeChange}>
                 <div className='flex items-center space-x-2'>
                   <RadioGroupItem value='light' id='light' />
@@ -92,7 +92,7 @@ const SettingsDialog = () => {
             <div className='flex items-center justify-between'>
               <div className='space-y-0.5'>
                 <Label htmlFor='notifications'>通知</Label>
-                <p className='text-sm text-muted-foreground'>アップデートの通知を受け取る</p>
+                <p className='text-muted-foreground text-sm'>アップデートの通知を受け取る</p>
               </div>
               <Switch id='notifications' checked={notifications} onCheckedChange={setNotifications} />
             </div>
@@ -100,7 +100,7 @@ const SettingsDialog = () => {
 
           <div className='space-y-4'>
             <h4 className='font-medium'>バージョン情報</h4>
-            <div className='text-sm text-muted-foreground'>
+            <div className='text-muted-foreground text-sm'>
               <p>Astro v5.7.5</p>
               <p>TailwindCSS v4.1.4</p>
               <p>React v19.1.0</p>

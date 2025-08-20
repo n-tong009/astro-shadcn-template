@@ -13,7 +13,8 @@
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
   "singleAttributePerLine": false,
-  "plugins": ["prettier-plugin-astro"],
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "tailwindConfig": "./tailwind.config.js",
   "overrides": [
     {
       "files": "*.astro",

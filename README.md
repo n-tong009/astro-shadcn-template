@@ -9,10 +9,10 @@ tracking.
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-GitHub_Pages-blue.svg)](https://n-tong009.github.io/astro-shadcn-template/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Astro](https://img.shields.io/badge/Astro-5.7.5-BC52EE.svg)](https://astro.build/)
-[![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)](https://react.dev/)
+[![Astro](https://img.shields.io/badge/Astro-5.12.9-BC52EE.svg)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-19.1.1-61DAFB.svg)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.4-38BDF8.svg)](https://tailwindcss.com/)
-[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.5.0-09090b)](https://ui.shadcn.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-2.10.0-09090b)](https://ui.shadcn.com/)
 
 ## 🚀 Features
 

@@ -5,21 +5,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 ---
 
 <div
-  class='container mx-auto pt-24 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24 px-4 flex flex-col items-center justify-center min-h-dvh overflow-x-hidden'
+  class='container mx-auto flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-4 pt-24 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24'
 >
-  <div class='text-center mb-12'>
+  <div class='mb-12 text-center'>
     <h1 class='text-2xl sm:text-3xl md:text-4xl'>Astro + TailwindCSS + shadcn/ui テンプレート</h1>
-    <p class='text-xl text-muted-foreground mb-6'>モダンなWeb開発に必要な機能を備えた包括的なテンプレート</p>
-    <div class='flex flex-wrap justify-center gap-2 mb-8'>
+    <p class='text-muted-foreground mb-6 text-xl'>モダンなWeb開発に必要な機能を備えた包括的なテンプレート</p>
+    <div class='mb-8 flex flex-wrap justify-center gap-2'>
       <Badge variant='secondary'>MIT License</Badge>
-      <Badge variant='secondary'>Astro 5.7.5</Badge>
-      <Badge variant='secondary'>React 19.1.0</Badge>
-      <Badge variant='secondary'>TailwindCSS 4.1.4</Badge>
-      <Badge variant='secondary'>shadcn/ui 2.5.0</Badge>
+      <Badge variant='secondary' className='bg-[#BC52EE]'>Astro 5.12.9</Badge>
+      <Badge variant='secondary' className='bg-[#61DAFB]'>React 19.1.1</Badge>
+      <Badge variant='secondary' className='bg-[#38BDF8]'>TailwindCSS 4.1.4</Badge>
+      <Badge variant='secondary' className='bg-[#09090b]'>shadcn/ui 2.10.0</Badge>
     </div>
   </div>
 
-  <div class='grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-12'>
+  <div class='mb-12 grid gap-4 sm:grid-cols-1 sm:gap-6 md:grid-cols-2'>
     <Card>
       <CardHeader>
         <CardTitle
@@ -150,16 +150,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
       <CardContent>
         <div class='space-y-4'>
           <div>
-            <p class='text-sm text-muted-foreground mb-2'>リポジトリのクローン</p>
-            <code class='block bg-muted p-2 rounded text-sm'> git clone [your-repository-url] </code>
+            <p class='text-muted-foreground mb-2 text-sm'>リポジトリのクローン</p>
+            <code class='bg-muted block rounded p-2 text-sm'> git clone [your-repository-url] </code>
           </div>
           <div>
-            <p class='text-sm text-muted-foreground mb-2'>依存関係のインストール</p>
-            <code class='block bg-muted p-2 rounded text-sm'> npm install </code>
+            <p class='text-muted-foreground mb-2 text-sm'>依存関係のインストール</p>
+            <code class='bg-muted block rounded p-2 text-sm'> npm install </code>
           </div>
           <div>
-            <p class='text-sm text-muted-foreground mb-2'>開発サーバーの起動</p>
-            <code class='block bg-muted p-2 rounded text-sm'> npm run dev </code>
+            <p class='text-muted-foreground mb-2 text-sm'>開発サーバーの起動</p>
+            <code class='bg-muted block rounded p-2 text-sm'> npm run dev </code>
           </div>
         </div>
       </CardContent>
