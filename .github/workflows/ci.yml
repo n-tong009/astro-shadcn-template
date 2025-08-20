@@ -5,6 +5,18 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  workflow_dispatch:
+
+# GitHub Pagesへの書き込み権限を設定
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時実行の制御（GitHub Pages用）
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   # ===================
@@ -148,23 +160,59 @@ jobs:
         run: pnpm audit --audit-level moderate
 
   # ===================
-  # Deployment Ready Check
+  # GitHub Pages Build & Deploy
   # ===================
-  deployment-ready:
-    name: Deployment Ready
+  pages-build:
+    name: Build Astro Site for GitHub Pages
     needs: [quality, test, build, security]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-      - name: All checks passed
-        run: echo "🎉 All checks passed! Ready for deployment."
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Notify deployment readiness
-        run: |
-          echo "✅ Code Quality: Passed"
-          echo "✅ Tests: Passed"
-          echo "✅ Build: Passed"
-          echo "✅ Security: Passed"
-          echo ""
-          echo "🚀 This build is ready for production deployment!"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: Setup GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Astro site
+        run: pnpm build
+        env:
+          NODE_ENV: production
+          PUBLIC_BASE_URL: /astro-shadcn-template/
+
+      - name: Upload build artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  # デプロイジョブ
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: pages-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
