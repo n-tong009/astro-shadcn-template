@@ -57,7 +57,3 @@ yarn-error.log*
 # misc
 *.local
 
-# Lock files
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
