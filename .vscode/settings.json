@@ -68,14 +68,6 @@
     "**/.git": true
   },
   
-  // ファイル監視除外
-  "files.watcherExclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/.astro": true,
-    "**/coverage": true
-  },
-  
   // Astro関連設定
   "astro.typescript.enabled": true,
   
@@ -86,11 +78,43 @@
   "less.lint.unknownAtRules": "ignore",
   "postcss.validate": false,
   
-  // Tailwind CSS設定
-  "tailwindCSS.experimental.configFile": "./tailwind.config.js",
+  // Tailwind CSS v4 設定
+  "tailwindCSS.experimental.configFile": null,
   "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"],
+    ["cva\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"],
+    ["className\\s*[:=]\\s*[\"'`]([^\"'`]*)", "$1"]
+  ],
+  
+  // TypeScript & React 19 最適化
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.tsc.autoDetect": "off",
+  
+  // Astro v5 最適化
+  "astro.trace.server": "messages",
+  
+  // エディタ機能強化
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  
+  // パフォーマンス最適化
+  "javascript.suggestionActions.enabled": false,
+  "typescript.suggestionActions.enabled": false,
+  
+  // ファイル監視除外（統合・最適化）
+  "files.watcherExclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.astro": true,
+    "**/coverage": true,
+    "**/pnpm-lock.yaml": true,
+    "**/.git": true
+  }
 }
