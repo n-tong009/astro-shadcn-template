@@ -1,13 +1,11 @@
 ---
 // src/components/Header.astro
-import { Button } from '@/components/ui/button';
 import HelpDialog from './HelpDialog';
 import SettingsDialog from './SettingsDialog';
-import { SITE_CONFIG } from '@/lib/constants';
 ---
 
 <header
-  class='header bg-background/95 supports-[backdrop-filter]:bg-background/60 absolute top-0 z-50 w-full border-b backdrop-blur'
+  class='header bg-background/95 supports-backdrop-filter:bg-background/60 absolute top-0 z-50 w-full border-b backdrop-blur'
 >
   <div class='header_wrap container mx-auto flex h-14 items-center px-4'>
     <div class='mr-4 flex flex-1'>
